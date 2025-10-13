@@ -23,8 +23,6 @@ function setup() {
   createCanvas(800, 600);
   textSize(14);
   textFont("Helvetica");
-  //necessario per far rallentare l'animazione
-  frameRate(30);
 
   /* attraverso questa formula individuo 
   e filtro le righe valide secondo le richieste di rules.txt */
@@ -32,7 +30,7 @@ function setup() {
     let r = table.getRow(i);
     let v0 = r.getNum(0);
     let v1 = r.getNum(1);
-    let v2 = Number(r.get(2));
+    let v2 = r.getNum(2);
     let v3 = r.getNum(3);
     let v4 = r.getNum(4);
 
@@ -51,11 +49,12 @@ function setup() {
   std = calculateStd(col1);
   moda = calculateMode(col2);
   mediana = calculateMedian(col3);
-  sommaFinale = calculateMean(col4) + calculateStd(col4);
+  media1 = calculateMean(col4) 
+  std1 = calculateStd(col4);
 
   /* la funzione map mi aiuta a stabilire la velocità del pesciolino,
-  proporzionalmente al risultato di sommaFinale */
-  fishSpeed = map(sommaFinale, 0, 100, 1, 5);
+  proporzionalmente al risultato di std1 */
+  fishSpeed = map(std1, 0, 100, 1, 5);
 
   /* il ciclo mi permette di posizionare le bolle
   in posizioni random ed il push di generarle come elementi 
@@ -69,31 +68,29 @@ function setup() {
 
 function draw() {
   background(180, 220, 255);
-  /* l'immagine è volutamente compressa, in quanto
-  si vogliono mettere in risalto solo le alghe */
-
-  
+ 
   /*MEDIA COL. 0 - 
    disegno bolle, il cui diametro corrisponde alla media */
   drawBubbles()
 
   /* DEVIAZIONE COL. 1 E MODA COL. 2 -
-  inserisco i valori legati alla personalizzazione delle due
-  rappresentazioni testuali */
-  fill("black");
+  aggiungo degli elementi decorativi come "contenitori" +
+  i valori legati alle due rappresentazioni testuali */
+  drawContainers();
+  fill("white");
   // nf mi aiuta a ridurre i decimali, formattando in modo corretto //
-  text("Deviazione standard della colonna 1: " + nf(std, 1, 2), 20, 40);
-  text("Moda della colonna 2: " + moda, 20, 70);
-
+  text("Deviazione standard della colonna 1: " + nf(std, 1, 2), 20, 540);
+  text("Moda della colonna 2: " + moda, 620, 540);
 
   /* MEDIANA COL. 3 - 
   basandomi sulla mediana, riproduco degli archi come fondale*/
   drawSeabed(mediana);
 
-  /* DEV. STANDARD + MEDIA COL. 4 -
-  disegno il pesciolino secondo le dimensioni standard */
+  /* DEV. STANDARD e MEDIA COL. 4 -
+  disegno il pesciolino secondo le dimensioni standard e 
+  aggiungo la media come modificatore per la posizione Y */
   function drawFish(x, y) {
-  image(fish_img, x, y - 30, 120, 120);
+  image(fish_img, x, y - media1, 120, 120);
   }
   /* aggiungo il movimento basandomi sul risultato della somma 
   tra media e deviazione standard */
@@ -107,8 +104,8 @@ function draw() {
 /* MEDIANA COL. 3 -
  questa funzione mi permette di creare degli archi,
  la cui altezza corrisponde alla mediana */
-function drawSeabed(medianaValue) {
-  let arcHeight = medianaValue;
+function drawSeabed(mediana) {
+  let arcHeight = mediana;
   fill(200, 180, 150);
   noStroke();
 /* il ciclo parte da sinistra e, ad ogni giro, aumenta di 70
@@ -135,6 +132,24 @@ attribuisce una posizione x e y */
     let pos = bubblePositions[i];
     ellipse(pos.x, pos.y, diametro, diametro);
   }
+}
+
+/* elementi decorativi in cui inserisco i valori rappresentati testualmente
+"div + testo" */
+function drawContainers() {
+  noStroke();
+  fill(40, 70, 100);
+  triangle(
+    -300, height,      
+    0, height - 250,   
+    500, height         
+  );
+  fill(40, 50, 100);
+  triangle(
+    100, height,         
+    800, height - 180,   
+    1000, height          
+  );
 }
 
 function calculateMean(arr) {
