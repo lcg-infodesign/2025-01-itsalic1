@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab. di Computer Grafica - Assignment 01</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="p5.min.js"></script>
+  <script src="p5.sound.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="contenitore-a">
+      <div class="paragrafo">
+        <h3> ASSIGNMENT 01  
+          <br> Calcolo e rappresentazione di indici statistici </h6>
+        <hr>
+        <p>
+        Per realizzare questa illustrazione sono partita dal filtrare le colonne valide secondo le regole assegnate; una volta effettuato questo passaggio
+        mi sono preoccupata di calcolare gli indici, partendo da valori calcolabili più semplicemente (come la media e la moda) sino ad arrivare ai più complessi.
+        <br> In seguito ho pensato a come associare i risultati ricavati alle rappresentazioni grafiche e testuali:
+        <ul>
+          <li> <b>Colonna 0 - MEDIA</b>
+            <br>Per quanto concerne questo valore, ho pensato di associare ad esso il diametro dell'ellisse che sarebbe poi stata, attraverso il codice, moltiplicata su coordinate x ed y randomiche. </li>
+          <li> <b>Colonna 1 - DEVIAZIONE STANDARD</b>
+            <br>Essendo piuttosto elevato, ho preferito mantenerlo sotto forma di testo; per integrarlo nella composizione, tuttavia, l'ho collocato all'interno di un "contenitore" simulante il fondale marino.  </li>
+          <li> <b>Colonna 2 - MODA </b> 
+            <br>Essendo negativo, ho voluto mantenere anch'esso come valore testuale; la collocazione resta la medesima del precedente.</li>
+          <li> <b>Colonna 3 - MEDIANA</b>
+            <br>In questo caso ho sviluppato degli archi, la cui altezza sarebbe stata pari al valore calcolato.</li>
+          <li> <b>Colonna 4 - MEDIA E DEVIAZIONE STANDARD</b>
+            <br> A questi valori ho voluto connettere una rappresentazione "creativa"; il primo indice ricavato è stato associato alla posizione del pesciolino rispetto all'asse delle ordinate, mentre il secondo 
+            alla velocità del movimento dell'animale.
+          </li>
+        </ul>
+        <br>
+        </p>
+      </div>
+    </div>
+    <script src="sketch.js"></script>
+  </body>
+</html>
